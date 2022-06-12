@@ -160,19 +160,19 @@ class GISCUPDataset(Dataset):
         train_end: str = "20200824",
         validation_end: str = "20200831",
         transform_func: Optional[Callable] = None,
-        tokenizer_dir: str = "/nvme/ganyunchong/didi/tokenizer",
-        kfold_data_dir: str = "/nvme/ganyunchong/didi/kfold",
+        tokenizer_dir: str = "D:/工作资料/giscup_2021/giscup_2021/train/tokenizer",
+        kfold_data_dir: str = "D:/工作资料/giscup_2021/giscup_2021/train/kfold",
         load: bool = False,
         flush: bool = False,
         fold: int = 0,
         calc_weight: Callable = time_weight,
-        data_dir: str = "/data3/ganyunchong/giscup_2021",
+        data_dir: str = "D:/工作资料/giscup_2021/giscup_2021/",
     ):
         super().__init__()
 
-        self.train_dir = os.path.join(data_dir, "train")
+        self.train_dir = os.path.join(data_dir, "train/train")
         self.parsed_dir = os.path.join(data_dir, "parsed")
-        self.test_file = os.path.join(data_dir, "20200901_test.txt")
+        self.test_file = os.path.join(data_dir, "test/20200901_test.txt")
         self.final_files = [os.path.join(data_dir, "20200901_test.txt")]
         self.weather_file = os.path.join(data_dir, "weather.csv")
         self.json_dir = os.path.join(data_dir, "json")
@@ -711,11 +711,11 @@ if __name__ == "__main__":
     dataset.preprocess_to_json()
 
     dataset = GISCUPDataset(
-        "train_val", load=True, kfold_data_dir="/nvme/ganyunchong/didi/5fold"
+        "train_val", load=True, kfold_data_dir="D:/工作资料/giscup_2021/giscup_2021/train/5fold"
     )
     dataset.split_k_fold(splits=5, shuffle=True)
 
     dataset = GISCUPDataset(
-        "train_val", load=True, kfold_data_dir="/nvme/ganyunchong/didi/10fold"
+        "train_val", load=True, kfold_data_dir="D:/工作资料/giscup_2021/giscup_2021/train/10fold"
     )
     dataset.split_k_fold(splits=10, shuffle=True)
